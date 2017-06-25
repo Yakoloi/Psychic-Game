@@ -1,7 +1,14 @@
-var letterArray = ['a','b','c'];
 
+var letterArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 var mysteryLetter = letterArray[Math.floor(Math.random() * letterArray.length)];
-console.log ('mysteryLetter ' + mysteryLetter);
+console.log ('initial mysteryLetter ' + mysteryLetter);
+
+function reset () {
+  mysteryLetter = letterArray[Math.floor(Math.random() * letterArray.length)];
+  document.getElementById('lguess').innerHTML = "";
+  console.log ('new mysterLetter ' + mysteryLetter)
+}
+
 
 var wins = 0;
 var lives = 10;
@@ -14,18 +21,17 @@ document.getElementById('losstab').innerHTML = "Losses: " + losses;
 
 document.onkeyup = function(event) {
   var playerGuess = event.key;
-  console.log('playerGuess ' + playerGuess)
 
-  if (playerGuess == mysteryLetter){
-    wins++;
+  if (playerGuess === mysteryLetter) {
+    wins++; reset();
   } else {
     lives--;
   }
 
   if (lives === 0){
-    losses++; lives = 10;
-    document.getElementById('lguess').innerHTML = ""
+    losses++; lives = 10; reset();
   }
+
   console.log(losses);
 
   document.getElementById('lguess').innerHTML +=playerGuess;
